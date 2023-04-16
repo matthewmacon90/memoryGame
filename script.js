@@ -1,5 +1,8 @@
 const gameContainer = document.getElementById("game");
 
+//Moving this into a function
+let clicked = 0;
+
 const COLORS = [
   "red",
   "blue",
@@ -24,9 +27,6 @@ function shuffle(array) {
     // Pick a random index
     let index = Math.floor(Math.random() * counter);
 
-    // console.log(`array[counter]: `, array[counter]);
-    // console.log(`array[index]: `, array[index]);
-
     // Decrease counter by 1
     counter--;
 
@@ -37,7 +37,7 @@ function shuffle(array) {
   }
 
   return array;
-}
+};
 
 let shuffledColors = shuffle(COLORS);
 
@@ -57,17 +57,44 @@ function createDivsForColors(colorArray) {
 
     // append the div to the element with an id of game
     gameContainer.append(newDiv);
-  }
-}
+  };
+};
+
+
+//I would like to get this function to work in tracking my clicks.
+// const clicks = (numberOfClicks) => {
+//   if(numberOfClicks > 2){
+//     alert(`you have clicked ${numberOfClicks} times.`);
+//     return;
+//   };
+//   console.log('numberOfClicks: ', numberOfClicks);
+//   return clicks;
+// };
 
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   console.log("you just clicked", event.target);
-  // if(event.target.className === 'green'){
-  //   event.target.style.backgroundColor = 'green';
-  // }
-  
+  // let clickCounter = 0;
+  // clicks(clickCounter);
+  // clickCounter++;
+  // console.log('clickCounter: ', clickCounter);
+
+
+  //Track clicks on the game container divs
+  // if(clicked >= 2){
+  //   alert(`you have clicked ${clicked} times.`);
+  //   return clicked = 0;
+  // };
+  // clicked++;
+
+  if(event.target.className !== event.target.className) {
+    //Turn color back to white.
+  };
+
+
+  //I don't believe I need this code below(switch statement)that I wrote because the colors needs to be their colors all the time. When I click it should reveal their color.
+
   switch (event.target.className) {
     case 'green':
       event.target.style.backgroundColor = 'green';
@@ -87,7 +114,7 @@ function handleCardClick(event) {
     default:
       break;
   };
-}
+};
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
