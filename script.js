@@ -1,5 +1,8 @@
 const gameContainer = document.getElementById("game");
 
+let cardOne = null;
+let cardTwo = null;
+
 //Moving this into a function
 let clicked = 0;
 
@@ -75,26 +78,39 @@ function createDivsForColors(colorArray) {
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   console.log("you just clicked", event.target);
-  // let clickCounter = 0;
-  // clicks(clickCounter);
-  // clickCounter++;
-  // console.log('clickCounter: ', clickCounter);
 
+  // Track clicks on the game container divs
+  console.log(`BEFORE IF: `, clicked);
+  if(clicked >= 2){
+    alert(`you have clicked ${clicked} times.`);
+  };
+  clicked++;
+  console.log(`AFTER IF: `, clicked);
+  console.log(`clicked === 1: `, clicked === 1);
 
-  //Track clicks on the game container divs
-  // if(clicked >= 2){
-  //   alert(`you have clicked ${clicked} times.`);
-  //   return clicked = 0;
-  // };
-  // clicked++;
-
-  if(event.target.className !== event.target.className) {
-    //Turn color back to white.
+  if(clicked === 1) {
+    setCardColor(event);
+    console.log(`a`);
+    console.log(`event.target.className: `, event.target.className);
+    cardOne = event.target
+    console.log(`cardOne: `, cardOne);
+    return;
   };
 
+  if(clicked === 2) {
+    setCardColor(event);
+    cardTwo = event.target;
+    console.log(`cardTwo: `, cardTwo);
+  };
 
-  //I don't believe I need this code below(switch statement)that I wrote because the colors needs to be their colors all the time. When I click it should reveal their color.
+  if(cardOne.className !== cardTwo.className){
+    cardOne.style.backgroundColor = null;
+    cardTwo.style.backgroundColor = null;
+  };
+  clicked = 0;
+};
 
+const setCardColor = (event) => {
   switch (event.target.className) {
     case 'green':
       event.target.style.backgroundColor = 'green';
