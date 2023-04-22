@@ -47,6 +47,7 @@ function createDivsForColors(colorArray) {
   for (let color of colorArray) {
     const newDiv = document.createElement("div");
     newDiv.classList.add(color);
+    newDiv.innerText = color; // @TODO: REMOVE BEFORE COMMIT!!!
     newDiv.addEventListener("click", handleCardClick);
     gameContainer.append(newDiv);
   };
@@ -55,12 +56,12 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 function handleCardClick(event) {
   console.log("you just clicked", event.target);
-  if(numOfCardsRevealed === 10) {
-    winner();
-  } else {
+  // if(numOfCardsRevealed === COLORS.length) {
+  //   winner();
+  // } else {
     clicks();
     clickTracker(event);
-  }
+  // }
 };
 
 const clicks = () => {
@@ -71,23 +72,25 @@ const clicks = () => {
 };
 
 const clickTracker = (event) => {
+  setCardColor(event);
+  
   if(clicked === 1) {
-    setCardColor(event);
     cardOne = event.target
-    return;
   };
 
   if(clicked === 2) {
-    setCardColor(event);
     cardTwo = event.target;
+    checkCardMatch(cardOne , cardTwo);
   };
-  checkCardMatch(cardOne , cardTwo);
 };
 
 const checkCardMatch = (cardOne, cardTwo) => {
   if(cardOne.className !== cardTwo.className){
-    cardOne.style.backgroundColor = null;
-    cardTwo.style.backgroundColor = null;
+    setTimeout(() => {
+      alert(`Didn't match this time! Try again :)`);
+      cardOne.style.backgroundColor = null;
+      cardTwo.style.backgroundColor = null;
+    }, 1);
   } else {
     increaseNumOfcardsRevealed();
     console.log(`numOfCardsRevealed: `, numOfCardsRevealed);
@@ -97,10 +100,16 @@ const checkCardMatch = (cardOne, cardTwo) => {
 
 const increaseNumOfcardsRevealed = () => {
   numOfCardsRevealed+=2;
+
+  if(numOfCardsRevealed === COLORS.length) {
+    winner();
+  }
 };
 
 const winner = () => {
-    return alert(`You Won! Congrats!`);
+    setTimeout(() => {
+      return alert(`You Won! Congrats!`);
+    }, 1);
 };
 
 const setCardColor = (event) => {
