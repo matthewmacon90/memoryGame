@@ -5,6 +5,7 @@ let cardTwo = null;
 
 //Moving this into a function
 let clicked = 0;
+let numOfCardsRevealed = 0;
 
 const COLORS = [
   "red",
@@ -63,51 +64,55 @@ function createDivsForColors(colorArray) {
   };
 };
 
-
-//I would like to get this function to work in tracking my clicks.
-// const clicks = (numberOfClicks) => {
-//   if(numberOfClicks > 2){
-//     alert(`you have clicked ${numberOfClicks} times.`);
-//     return;
-//   };
-//   console.log('numberOfClicks: ', numberOfClicks);
-//   return clicks;
-// };
-
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   console.log("you just clicked", event.target);
+  clicks();
+  checkCardMatch(event);
+};
 
-  // Track clicks on the game container divs
-  console.log(`BEFORE IF: `, clicked);
+
+// I would like to get this function to work in tracking my clicks.
+const clicks = () => {
   if(clicked >= 2){
     alert(`you have clicked ${clicked} times.`);
   };
   clicked++;
-  console.log(`AFTER IF: `, clicked);
-  console.log(`clicked === 1: `, clicked === 1);
+};
 
+const checkCardMatch = (event) => {
   if(clicked === 1) {
     setCardColor(event);
-    console.log(`a`);
-    console.log(`event.target.className: `, event.target.className);
     cardOne = event.target
-    console.log(`cardOne: `, cardOne);
     return;
   };
 
   if(clicked === 2) {
     setCardColor(event);
     cardTwo = event.target;
-    console.log(`cardTwo: `, cardTwo);
   };
 
   if(cardOne.className !== cardTwo.className){
     cardOne.style.backgroundColor = null;
     cardTwo.style.backgroundColor = null;
+  } else {
+    cardsRevealed();
+    console.log(`numOfCardsRevealed: `, numOfCardsRevealed);
   };
   clicked = 0;
+};
+
+const cardsRevealed = () => {
+  if(numOfCardsRevealed === 10) {
+      winner();
+  } else {
+      numOfCardsRevealed+=2
+  }
+}
+
+const winner = () => {
+    return alert(`You Won! Congrats!`);
 };
 
 const setCardColor = (event) => {
