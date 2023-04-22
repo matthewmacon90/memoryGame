@@ -56,47 +56,38 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 function handleCardClick(event) {
   console.log("you just clicked", event.target);
-  // if(numOfCardsRevealed === COLORS.length) {
-  //   winner();
-  // } else {
-    clicks();
-    clickTracker(event);
-  // }
+  cardTracker(event);
 };
 
-const clicks = () => {
-  if(clicked >= 2){
-    alert(`you have clicked ${clicked} times.`);
-  };
-  clicked++;
-};
-
-const clickTracker = (event) => {
+const cardTracker = (event) => {
   setCardColor(event);
-  
-  if(clicked === 1) {
-    cardOne = event.target
-  };
 
-  if(clicked === 2) {
+  if(cardOne === null) {
+    cardOne = event.target;
+  } else if (cardOne !== event.target && cardTwo === null) {
     cardTwo = event.target;
-    checkCardMatch(cardOne , cardTwo);
-  };
+    setTimeout(() => {
+      checkCardMatch(cardOne , cardTwo);
+    }, 1)
+  }
 };
 
 const checkCardMatch = (cardOne, cardTwo) => {
   if(cardOne.className !== cardTwo.className){
-    setTimeout(() => {
-      alert(`Didn't match this time! Try again :)`);
+    alert(`Didn't match this time! Try again :)`);
       cardOne.style.backgroundColor = null;
       cardTwo.style.backgroundColor = null;
-    }, 1);
   } else {
     increaseNumOfcardsRevealed();
     console.log(`numOfCardsRevealed: `, numOfCardsRevealed);
   };
-  clicked = 0;
-}
+  resetCards();
+};
+
+const resetCards = () => {
+  cardOne = null;
+  cardTwo = null;
+};
 
 const increaseNumOfcardsRevealed = () => {
   numOfCardsRevealed+=2;
