@@ -1,8 +1,8 @@
 const gameContainer = document.getElementById("game");
+const buttonContainer = document.getElementById('buttonContainer');
 
 let cardOne = null;
 let cardTwo = null;
-let clicked = 0;
 let numOfCardsRevealed = 0;
 
 const COLORS = [
@@ -94,6 +94,7 @@ const increaseNumOfcardsRevealed = () => {
 
   if(numOfCardsRevealed === COLORS.length) {
     winner();
+    createResetButton();
   }
 };
 
@@ -101,6 +102,17 @@ const winner = () => {
     setTimeout(() => {
       return alert(`You Won! Congrats!`);
     }, 1);
+};
+
+const createResetButton = () => {
+  const resetBtn = document.createElement('button');
+  resetBtn.innerText = 'Reset Game';
+  resetBtn.setAttribute('type', 'submit');
+  buttonContainer.append(resetBtn);
+
+  resetBtn.addEventListener('click', (event) => {
+    location.reload();
+});
 };
 
 const setCardColor = (event) => {
