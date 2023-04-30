@@ -2,8 +2,19 @@ body {
   background-color: aqua;
 }
 
+.h1_titlePage{
+  display: flex;
+  justify-content: center;
+  border: 4px dashed;
+  border-radius: 10px;
+  position: relative;
+  left: 480px;
+  width: 30%;
+}
+
 #game div {
   border: 1px solid black;
+  border-radius: 20px;
   width: 15%;
   height: 200px;
   margin: 10px;
@@ -11,3 +22,7 @@ body {
   perspective: 600px;
 };
 
+/* Working on adding box-shadow to divs and will animate this late. */
+.colorBox {
+  box-shadow: 2px, 2px, 5px, black;
+}
