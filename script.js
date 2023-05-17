@@ -47,7 +47,7 @@ function createDivsForColors(colorArray) {
   for (let color of colorArray) {
     const newDiv = document.createElement("div");
     newDiv.classList.add(color);
-    newDiv.classList.add('colorBox');
+    // newDiv.classList.add('colorBox');
     newDiv.addEventListener("click", handleCardClick);
     gameContainer.append(newDiv);
   };
